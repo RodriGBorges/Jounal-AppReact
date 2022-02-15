@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import validator from 'validator';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeError, setError } from '../../actions/ui';
 
 export const RegisterScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const { msgError } = useSelector(state => state.ui)
+    //console.log(msgError);
 
     const [formValues, handleInputChange] = useForm({
         name: 'Pececito',
@@ -24,27 +31,26 @@ export const RegisterScreen = () => {
 
     const isFormValid = () => {
 
-        if(name.trim().length === 0) {
-            console.log('Nombre requerido');
-            return false
+        switch (true) {
+            case name.trim().length === 0:
+                dispatch(setError('Nombre requerido'))
+                return false;
+            case !validator.isEmail(email):
+                dispatch(setError('Email inválido'))
+                return false;
+            case password.length < 6:
+                dispatch(setError('La contraseña debe tener mínimo 6 caracteres'))
+                return false;
+            case password !== password2:
+                dispatch(setError('Las contraseñas no coinciden'))
+                return false;
+        
+            default:
+                dispatch(removeError())
+                return true;
         }
 
-        if(!validator.isEmail(email)) {
-            console.log('Email inválido');
-            return false
-        }
-
-        if(password.length < 6) {
-            console.log('La contraseña debe tener mínimo 6 caracteres');
-            return false
-        }
-
-        if(password !== password2) {
-            console.log('Las contraseñas no coinciden');
-            return false
-        }
-
-        return true
+        
     }
 
     return (
@@ -53,6 +59,13 @@ export const RegisterScreen = () => {
             
 
             <form onSubmit={handleRegister}>
+
+                {
+                    msgError &&
+                    <div className='auth__alert-error'>
+                        {msgError}
+                    </div>
+                }
 
                 <input 
                     type="text"
