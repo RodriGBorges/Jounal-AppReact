@@ -16,4 +16,4 @@ export const store = createStore(
         applyMiddleware(thunk)
     )
 )
-//
+// thunk = middleware para los pedidos asincronicos (firebase)

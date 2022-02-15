@@ -1,6 +1,6 @@
 import { types } from "../types";
 
-
+// un Reducer recibe un estado y una accion
 export const authReducer = (state = {}, action) => {
 
     switch (action.type) {
