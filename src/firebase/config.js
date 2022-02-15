@@ -1,6 +1,6 @@
 //Código copiado de firebase, creación de app web
 import { initializeApp } from "firebase/app";
-import { getFirestone } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 
 
@@ -18,7 +18,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 //Configuración de Firestore
-const db = getFirestone(app);
+const db = getFirestore(app);
 
 // Configuración de la autenticación de Google
 const googleAuthProvider = new GoogleAuthProvider();
+
+export {
+    db,
+    googleAuthProvider
+}
