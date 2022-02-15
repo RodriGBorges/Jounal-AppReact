@@ -3,7 +3,7 @@ import { authReducer } from '../reducers/authReducer';
 import thunk from 'redux-thunk';
 //
 
-const composeEnhancers = (typeof windows !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 //para poder utilizar varios middlewares en el store
 
 const reducers = combineReducers({
