@@ -1,4 +1,4 @@
-import { signInWithPopup, getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithPopup, getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { googleAuthProvider } from "../firebase/config";
 import { types } from "../types";
 
@@ -6,9 +6,11 @@ export const startLoginEmailPassword = (email, password) => {
 
     return (dispatch) => {
 
-        setTimeout(() => {
-            dispatch(login(123123, 'Patito'))
-        }, 3000)
+        signInWithEmailAndPassword(getAuth(), email, password)
+            .then(({ user }) => {
+                dispatch(login(user.uid, user.displayName))
+            })
+            .catch(error => console.log(error))
     }
 
 }
@@ -24,6 +26,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
                 await updateProfile(user, {
                     displayName: name
                 })
+                dispatch(login(user.uid, user.displayName))
             })
             .catch(error => console.log(error))
     }
