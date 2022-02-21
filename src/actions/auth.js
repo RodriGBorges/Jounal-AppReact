@@ -1,4 +1,4 @@
-import { signInWithPopup, getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup, getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { googleAuthProvider } from "../firebase/config";
 import { types } from "../types";
 import { finishLoading, startLoading } from "./ui";
@@ -57,6 +57,19 @@ export const login = (uid, displayName) => ({
         displayName
     }
 })
+
+export const startLogout = () => {
+
+    return (dispatch) => {
+        signOut(getAuth())
+            .then( () => {
+                dispatch(logout())
+            })
+            .catch(error => console.log(error))
+    }
+}
+
+export const logout = () => ({type: types.logout})
 
 /* 
 export const login = (uid, displayName) => ({

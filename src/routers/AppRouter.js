@@ -3,13 +3,14 @@ import {
     BrowserRouter,
     Route,
     Routes,
-  } from 'react-router-dom';
+} from 'react-router-dom';
 
 import { AuthRouter } from './AuthRouter';
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
+import { LoginScreen } from '../components/auth/LoginScreen';
 
 export const AppRouter = () => {
 
@@ -25,7 +26,7 @@ export const AppRouter = () => {
                 dispatch(login(user.uid, user.displayName))
                 setIsLoggedIn(true)
             } else {
-                setIsLoggedIn(true)
+                setIsLoggedIn(false)
             }
 
             setChecking(false)
@@ -61,12 +62,29 @@ export const AppRouter = () => {
                 <Routes>
                     <Route 
                         path="/auth/*"
-                        element={ <AuthRouter/> }
+                        element={ 
+                        !isLoggedIn 
+                        ? 
+                        <AuthRouter/> 
+                        :
+                        <JournalScreen/>
+                        }
                     />
 
                     <Route 
                         path="/"
-                        element={ <JournalScreen/> }
+                        element={ 
+                        isLoggedIn 
+                        ?
+                        <JournalScreen/> 
+                        :
+                        <div className="auth__main">
+                            <div className="auth__box-container">
+                                <LoginScreen/>
+                            </div>
+
+                        </div>
+                        }
                     />
 
                 </Routes>
