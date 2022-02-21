@@ -8,7 +8,7 @@ export const LoginScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { loading } = useSelector(state => state.ui)
+    const { loading, msgError } = useSelector(state => state.ui)
 
     const [formValues, handleInputChange] = useForm({
         email: 'prueba@gmail.com',
@@ -34,6 +34,13 @@ export const LoginScreen = () => {
             <h3 className="auth__title">Iniciar sesión</h3>
 
             <form onSubmit={handleLogin}>
+
+                {
+                    msgError &&
+                    <div className='auth__alert-error'>
+                        {msgError}
+                    </div>
+                }
 
                 <input 
                     type="text"

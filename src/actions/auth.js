@@ -1,7 +1,8 @@
 import { signInWithPopup, getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { googleAuthProvider } from "../firebase/config";
 import { types } from "../types";
-import { finishLoading, startLoading } from "./ui";
+import { finishLoading, setError, startLoading } from "./ui";
+import { errors } from '../errors';
 
 export const startLoginEmailPassword = (email, password) => {
 
@@ -15,7 +16,12 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(finishLoading())
             })
             .catch(error => {
-                console.log(error)
+                console.error(error.message);
+                dispatch(finishLoading());
+
+                for (const elemento of errors) {
+                    elemento.code === error.message && dispatch(setError(elemento.msg))
+                }
             })
     }
 
