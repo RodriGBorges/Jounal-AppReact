@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { loadNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -24,7 +25,10 @@ export const AppRouter = () => {
             //console.log(user)
             if(user?.uid) {
                 dispatch(login(user.uid, user.displayName))
-                setIsLoggedIn(true)
+                setIsLoggedIn(true);
+
+                dispatch(loadNotes())
+
             } else {
                 setIsLoggedIn(false)
             }
