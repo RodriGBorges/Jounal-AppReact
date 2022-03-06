@@ -56,8 +56,8 @@ export const loadNotes = () => {
                 })
             })
 
-            dispatch(setNotes(notes));
-            
+            dispatch(setNotes(notes))
+
         } catch (error) {
             console.log(error);
         }
