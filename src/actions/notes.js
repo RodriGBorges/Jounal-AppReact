@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { types } from '../types';
 
@@ -69,3 +69,25 @@ export const setNotes = (notes) => ({
     type: types.notesLoad,
     payload: notes
 })
+
+export const saveNote = (note) => {
+
+    return async (dispatch, getState) => {
+
+        const {uid} = getState().auth;
+
+        const noteToFirestore = {...note};
+        //eliminamos un dato que no queremos del objeto
+        delete noteToFirestore.id;
+        // console.log(noteToFirestore);
+
+        try {
+
+            await updateDoc(doc(db, `${uid}/journal/notes`, note.id), noteToFirestore)
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+}
