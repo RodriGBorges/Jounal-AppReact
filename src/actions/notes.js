@@ -83,7 +83,9 @@ export const saveNote = (note) => {
 
         try {
 
-            await updateDoc(doc(db, `${uid}/journal/notes`, note.id), noteToFirestore)
+            await updateDoc(doc(db, `${uid}/journal/notes`, note.id), noteToFirestore);
+
+            dispatch(updateNotes(note.id, note));
 
         } catch (error) {
             console.log(error);
@@ -91,3 +93,11 @@ export const saveNote = (note) => {
 
     }
 }
+
+export const updateNotes = (id, note) => ({
+    type: types.noteUpdate,
+    payload: {
+        id,
+        note
+    }
+})
