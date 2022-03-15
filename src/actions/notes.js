@@ -111,10 +111,16 @@ export const startDeleteNote = (id) => {
         try {
 
             await deleteDoc(doc(db, `${uid}/journal/notes`, id))
-            console.log('Se eliminó???');
+            // console.log('Se eliminó???');
+            dispatch(deleteNote(id))
 
         } catch (error) {
             console.log(error);
         }
     }
 }
+
+export const deleteNote = (id) => ({
+    type: types.noteDelete,
+    payload: id
+})
