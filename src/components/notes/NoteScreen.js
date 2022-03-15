@@ -25,15 +25,17 @@ export const NoteScreen = () => {
             activeId.current = note.id
         }
 
-    }, [note, reset])
+    }, [note, reset]);
 
     useEffect(() => {
         
         dispatch(activeNote(note.id, {...formValues}))
 
-    }, [formValues])
+    }, [formValues]);
     
-    
+    const handleDelete = () => {
+
+    }
 
     return (
         <div className="notes__main-content">
@@ -66,6 +68,13 @@ export const NoteScreen = () => {
                         alt="imagen"
                     />
                 </div>
+
+                <button
+                className="btn buttons__btn-danger mt-5 pointer"
+                onClick={handleDelete}
+                >
+                    Delete
+                </button>
 
 
             </div>
