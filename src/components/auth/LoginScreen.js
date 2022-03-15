@@ -88,7 +88,7 @@ export const LoginScreen = () => {
                 </div>
 
                 <Link 
-                    to="/auth/register"
+                    to="/Journal-AppReact/auth/register"
                     className="link"
                 >
                     Creá tu cuenta    

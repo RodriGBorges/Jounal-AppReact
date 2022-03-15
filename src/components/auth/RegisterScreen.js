@@ -118,7 +118,7 @@ export const RegisterScreen = () => {
 
 
                 <Link 
-                    to="/auth/login"
+                    to="/Journal-AppReact/auth/login"
                     className="link"
                 >
                     ¿Estás registrado/a?
