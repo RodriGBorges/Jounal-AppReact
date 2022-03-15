@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { types } from '../types';
 
@@ -101,3 +101,20 @@ export const updateNotes = (id, note) => ({
         note
     }
 })
+
+export const startDeleteNote = (id) => {
+
+    return async (dispatch, getState) => {
+
+        const {uid} = getState().auth;
+
+        try {
+
+            await deleteDoc(doc(db, `${uid}/journal/notes`, id))
+            console.log('Se eliminó???');
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
