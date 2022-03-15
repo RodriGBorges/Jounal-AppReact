@@ -65,7 +65,7 @@ export const AppRouter = () => {
             <div>
                 <Routes>
                     <Route 
-                        path="/auth/*"
+                        path="/Journal-AppReact/auth/*"
                         element={ 
                         !isLoggedIn 
                         ? 
@@ -76,7 +76,7 @@ export const AppRouter = () => {
                     />
 
                     <Route 
-                        path="/"
+                        path="/Journal-AppReact/"
                         element={ 
                         isLoggedIn 
                         ?

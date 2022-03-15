@@ -19,7 +19,7 @@ export const AuthRouter = () => {
                         element={ <RegisterScreen/> }
                     />
 
-               </Routes>
+                </Routes>
             </div>
 
         </div>
