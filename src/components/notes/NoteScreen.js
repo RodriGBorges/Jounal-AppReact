@@ -63,12 +63,16 @@ export const NoteScreen = () => {
                     onChange={handleInputChange}
                 ></textarea>
 
-                <div className="notes__image">
-                    <img 
-                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-                        alt="imagen"
-                    />
-                </div>
+                {
+                    note.url && 
+                    <div className="notes__image">
+                        <img 
+                            src={note.url}
+                            alt={note.id}
+                        />
+                    </div>
+                }
+
 
                 <button
                 className="btn buttons__btn-danger mt-5 pointer"
