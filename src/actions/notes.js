@@ -1,4 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 import { db } from '../firebase/config';
 import { types } from '../types';
 
@@ -142,9 +143,18 @@ export const uploadFile = (file) => {
         // console.log(formData);
 
         formData.append('upload_preset', 'react-journal');
-        formData.append('file', file)
+        formData.append('file', file);
 
         // console.log(formData.getAll('file'));
+
+        Swal.fire({
+            title: 'Subiendo imagen...',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
 
         try {
             
@@ -160,6 +170,8 @@ export const uploadFile = (file) => {
             active.url = result.secure_url;
             
             dispatch(saveNote(active))
+
+            Swal.close();
 
         } catch (error) {
             console.log(error);
