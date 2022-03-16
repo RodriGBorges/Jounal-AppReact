@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveNote, uploadFile } from '../../actions/notes';
+import { addNewNote, saveNote, uploadFile } from '../../actions/notes';
 
 export const NotesAppBar = () => {
 
@@ -8,7 +8,9 @@ export const NotesAppBar = () => {
     const { active } = useSelector(state => state.notes)
 
     const handleSave = () => {
-        dispatch(saveNote(active))
+        dispatch(saveNote(active));
+        //disparamos agregar nueva nota para que se actualice el sidebar con las notas después de guardar
+        dispatch(addNewNote(active));
     }
 
     const handleFileChange = ({target}) => {

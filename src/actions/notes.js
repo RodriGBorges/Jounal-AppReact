@@ -37,6 +37,11 @@ export const startNewNotes = () => {
     }
 }
 
+export const addNewNote = (note) => ({
+    type: types.noteAddNew,
+    payload: note
+})
+
 export const loadNotes = () => {
     return async (dispatch, getState) => {
 

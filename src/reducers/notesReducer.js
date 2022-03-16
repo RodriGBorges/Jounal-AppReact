@@ -10,7 +10,10 @@ export const notesReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.noteAddNew:
 
-            return state;
+            return {
+                ...state,
+                notes: [...state.notes, action.payload]
+            };
         case types.noteActive:
 
             return {
