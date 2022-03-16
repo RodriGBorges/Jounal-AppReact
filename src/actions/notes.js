@@ -124,3 +124,41 @@ export const deleteNote = (id) => ({
     type: types.noteDelete,
     payload: id
 })
+
+export const uploadFile = (file) => {
+
+    return async (dispatch, getState) => {
+
+        const { active } = getState().notes;
+        const cloudURL = 'https://api.cloudinary.com/v1_1/rodriiborges/upload';
+
+        const formData = new FormData();
+
+        // console.log(formData);
+
+        formData.append('upload_preset', 'react-journal');
+        formData.append('file', file)
+
+        // console.log(formData.getAll('file'));
+
+        try {
+            
+            const response = await fetch(cloudURL, {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            // console.log(result);
+
+            active.url = result.secure_url;
+            
+            dispatch(saveNote(active))
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+}
