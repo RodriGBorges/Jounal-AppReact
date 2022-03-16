@@ -91,7 +91,7 @@ export const AppRouter = () => {
                         </div>
                         }
                     />
-                    <Route path='/' element={() => <Navigate to='/Journal-AppReact/'/>}/>
+                    <Route path='/' element={<Navigate to='/Journal-AppReact/'/>}/>
 
                 </Routes>
             </div>
