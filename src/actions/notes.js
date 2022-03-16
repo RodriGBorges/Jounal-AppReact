@@ -147,6 +147,7 @@ export const uploadFile = (file) => {
 
         // console.log(formData.getAll('file'));
 
+        //Revisar documentación de sweet alert para carteles mas personalizados
         Swal.fire({
             title: 'Subiendo imagen...',
             text: 'Por favor espere',
@@ -155,6 +156,7 @@ export const uploadFile = (file) => {
                 Swal.showLoading()
             }
         });
+
 
         try {
             

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     BrowserRouter,
+    Navigate,
     Route,
     Routes,
 } from 'react-router-dom';
@@ -90,6 +91,7 @@ export const AppRouter = () => {
                         </div>
                         }
                     />
+                    <Route path='/' element={() => <Navigate to='/Journal-AppReact/'/>}/>
 
                 </Routes>
             </div>
