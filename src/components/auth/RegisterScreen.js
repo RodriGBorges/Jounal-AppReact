@@ -14,7 +14,7 @@ export const RegisterScreen = () => {
     //console.log(msgError);
 
     const [formValues, handleInputChange] = useForm({
-        name: 'Pececito',
+        name: 'Prueba',
         email: 'prueba@gmail.com',
         password: '123123',
         password2: '123123'
